@@ -32,7 +32,7 @@ app.use(express.json());
 //pode ser necessarioa {useNewUrlParser: true}
 
 
-mongoose.connect('mongodb://localhost:27017/meuBd');
+mongoose.connect('mongodb://localhost:27017/meuBd',{useNewUrlParser: true});
 
 
 //como pode ser que tenha diversos models para fazer isso, pode ser usada uma biblioteca

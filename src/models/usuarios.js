@@ -1,6 +1,8 @@
 //importa o mongoose
 const mongoose = require('mongoose');
 
+const mongoosePaginate = require('mongoose-paginate');
+
 //vamos criar o schema (model) do banco de dados
 const UserSchema = new mongoose.Schema({
     //vamos passar qual campo quero salvar no banco de dados
@@ -44,5 +46,6 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
+UserSchema.plugin(mongoosePaginate);
 //registro o model na nossa aplicacao
 mongoose.model('User', UserSchema);

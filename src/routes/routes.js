@@ -12,4 +12,16 @@ const usuarioController = require("../controllers/usuarios");
 //insert
 routes.post('/usuarios', usuarioController.insert);
 
+//quando for pegar algo, usa Get
+//Select
+routes.get('/usuarios', usuarioController.index);
+
+//selecionar um só
+routes.get('/usuarios/:id', usuarioController.details);
+
+//selecionar um só e atualizar
+routes.put('/usuarios/:id', usuarioController.update);
+
+routes.delete('/usuarios/:id', usuarioController.delete);
+
 module.exports = routes;
