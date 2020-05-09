@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = express.Router();
 
-const usuarioController = require("../controllers/usuarios");
+const usuarioController = require("../controller/usuarios.js");
 
 //toda vez q o usuario acessar a rota (rota raiz), tem a funcao que recebe o req e res
 //req simboliza a requisicao que esta sendo feita ao servidor 
@@ -12,16 +12,16 @@ const usuarioController = require("../controllers/usuarios");
 //insert
 routes.post('/usuarios', usuarioController.insert);
 
-//quando for pegar algo, usa Get
-//Select
+//quando buscar, pode ser get
+//select
 routes.get('/usuarios', usuarioController.index);
-
-//selecionar um só
+//details
 routes.get('/usuarios/:id', usuarioController.details);
 
-//selecionar um só e atualizar
+//update
 routes.put('/usuarios/:id', usuarioController.update);
 
+//delete
 routes.delete('/usuarios/:id', usuarioController.delete);
 
 module.exports = routes;

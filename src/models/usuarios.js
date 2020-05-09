@@ -1,6 +1,7 @@
 //importa o mongoose
 const mongoose = require('mongoose');
 
+//importa o mongoose paginate (paginacao)
 const mongoosePaginate = require('mongoose-paginate');
 
 //vamos criar o schema (model) do banco de dados
@@ -46,6 +47,8 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
+//adiciona o plugin para permitir paginacao
 UserSchema.plugin(mongoosePaginate);
+
 //registro o model na nossa aplicacao
 mongoose.model('User', UserSchema);

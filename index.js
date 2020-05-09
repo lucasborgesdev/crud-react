@@ -4,20 +4,11 @@ const express = require('express');
 //chama o MongoDB
 const mongoose = require('mongoose');
 
-// variavel de conexao
-var db = mongoose.connection;
-//teste de conexao
-db.on('error', console.error);
-db.once('open', function() {
-  console.log('Conectado ao MongoDB.')
-  // Vamos adicionar nossos Esquemas, Modelos e consultas aqui
-});
-
 //para fazer o require no diretorio
 const requireDir = require('require-dir');
 
 //para fazer a permissao de acesso de outras api
-//const cors = require('cors');
+const cors = require('cors');
 
 //chamo essa funcao para ser executada
 //inicia o app
@@ -25,15 +16,12 @@ const app = express();
 //diz para minha aplicacao permitir que insira os dados no formato de json
 app.use(express.json());
 //aqui eu posso passar quais dominios quero permitir cors(aqui)
-//app.use(cors());
+app.use(cors());
 
 //iniciando o DB
 //precisamos passar a url de conexao
 //pode ser necessarioa {useNewUrlParser: true}
-
-
-mongoose.connect('mongodb://localhost:27017/meuBd',{useNewUrlParser: true});
-
+mongoose.connect('mongodb://localhost:27017/bancoCrud', {useNewUrlParser: true, useUnifiedTopology: true});
 
 //como pode ser que tenha diversos models para fazer isso, pode ser usada uma biblioteca
 //faz o papel de require em todos arquivos do diretorio para nao precisar fazer um por vez
