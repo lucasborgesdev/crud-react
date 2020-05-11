@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-import './update.css';
-import { Redirect } from 'react-router-dom';
+import './insert.css';
 import api from '../../services/services';
+import {Link, Redirect} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
 
 
-class EditarUsuario extends Component{
-    constructor(props){
-        super(props);
-        
+class CriarUsuario extends Component{
+    constructor(){
+        super();
+
         this.state ={
             usuario:{
                 nome: "",
                 matricula: 0,
+                ativo: "true",
                 endereco: {
                     cidade: "",
                     estado: ""
@@ -19,12 +22,7 @@ class EditarUsuario extends Component{
             },
             redirect: false,
         }
-    }
-    //trazer os dados e preencher os campos, chamar os dados do banco 
-    async componentDidMount(){
-        const {id} = this.props.match.params;
-        const response = await api.get(`/usuarios/${id}`);
-        this.setState({usuario: response.data});
+        
     }
     render () {
         const {redirect} = this.state;
@@ -34,9 +32,9 @@ class EditarUsuario extends Component{
             return (
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
-                    <legend>Editar Usuário</legend>
-                    <div className="usuario-update">
-                        <label htmlFor="nome">Nome:</label>
+                    <legend>Criar Usuário</legend>
+                    <div className="usuario-insert">
+                        <label htmlFor="nome">Nome</label>
                         <br/>
                         <input
                             type="text"
@@ -50,8 +48,8 @@ class EditarUsuario extends Component{
                             onChange={this.handleInputChange}
                         />
                     </div>
-                    <div className="usuario-update">
-                        <label htmlFor="matricula">Matricula:</label>
+                    <div className="usuario-insert">
+                        <label htmlFor="matricula">Matricula</label>
                         <br/>
                         <input
                             type="number"
@@ -65,8 +63,8 @@ class EditarUsuario extends Component{
                             onChange={this.handleInputChange}
                         />
                     </div>
-                    <div className="usuario-update">
-                        <label htmlFor="cidade">Cidade:</label>
+                    <div className="usuario-insert">
+                        <label htmlFor="cidade">Cidade</label>
                         <br/>
                         <input
                             type="text"
@@ -80,9 +78,8 @@ class EditarUsuario extends Component{
                             onChange={this.handleInputChangeEndereco}
                         />
                     </div>
-                  
-                    <div className="usuario-update">
-                        <label htmlFor="estado">Estado:</label>
+                    <div className="usuario-insert">
+                        <label htmlFor="estado">Estado</label>
                         <br/>
                         <input
                         type="text"
@@ -96,13 +93,38 @@ class EditarUsuario extends Component{
                             onChange={this.handleInputChangeEndereco}
                         />
                     </div>
-                    <br/>
-                    <button type="submit">Editar</button>
+                    <div className="usuario-insert">
+                        <label>
+                            <input
+                            type="radio"
+                            name="ativo"
+                            value="true"
+                            checked={this.state.usuario.ativo === "true"}
+                            onChange={this.handleInputChange}
+                            />
+                            Ativo
+                        </label>
+
+                        <label>
+                            <input
+                            type="radio"
+                            name="ativo"
+                            value="false"
+                            checked={this.state.usuario.ativo === "false"}
+                            onChange={this.handleInputChange}
+                            />
+                            Inativo
+                        </label>
+                    </div>
+                   
+                    <Button variant="success" type="submit" >Cadastrar</Button>
+                    <Button className="botao-voltar" variant="primary"><Link to={`/`}>Voltar</Link></Button>
                     </fieldset>
                 </form>
             )
         }
     }
+
     handleInputChange = event => {
         const target = event.target;
         const name = target.name;
@@ -121,31 +143,27 @@ class EditarUsuario extends Component{
 
         this.setState(prevState => {
             const usuario = {...prevState.usuario};
-            usuario.endereco[name] = value;
+            usuario.endereco[name] =value;
             return {usuario}
         })
-    };
+    }
 
     handleSubmit = event => {
-        const {id} =  this.props.match.params;
-
-        fetch(`http://localhost:3001/sistema/usuarios/${id}`, {
-            method: "put",
-            id: id,
+        fetch("http://localhost:3001/sistema/usuarios/", {
+            method:"post",
             body: JSON.stringify(this.state.usuario),
             headers: {
                 "Content-Type": "application/json"
+            },
+        })
+        .then(data => {
+            if(data.ok) {
+                this.setState({redirect: true})
             }
         })
-            .then(data => {
-                if(data.ok){
-                    this.setState({redirect:true});
-                }
-            })
-                event.preventDefault();
-    }
 
+        event.preventDefault();
+    }
 }
 
-
-export default EditarUsuario;
+export default CriarUsuario;

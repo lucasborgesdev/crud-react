@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import api from '../../services/services';
 import { Link } from 'react-router-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
 
 export default class Usuarios extends Component {
     //nao armazeno a variavel de forma local
@@ -48,9 +50,13 @@ export default class Usuarios extends Component {
     }
 
     render() {
+        
         const { usuarios, usuariosInfo, page } = this.state;
         return (
+            
             <div className="usuario-list">
+               
+                <p className="usuario-cad"><Link to={`/CriarUsuarios/`}>Cadastrar Usuário</Link></p>
                 {this.state.usuarios.map(usuario => (
                     <article key={usuario._id}>
                         <strong> {usuario.nome} </strong> 
@@ -61,8 +67,12 @@ export default class Usuarios extends Component {
                 ))}
 
                 <div className="actions"> 
+                    <Button variant="outline-primary" disabled={page===1} onClick={this.prevPage}>Voltar</Button>
+                    <Button variant="outline-primary" disabled={page===usuariosInfo.pages} onClick={this.nextPage}>Próxima</Button>
+                    {/* COMENTÁRIO JSX 
                     <button disabled={page===1} onClick={this.prevPage}>Anterior</button>
                     <button disabled={page===usuariosInfo.pages} onClick={this.nextPage}>Próxima</button>
+                    */}      
                 </div>
             </div>
         )

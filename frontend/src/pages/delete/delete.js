@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect,Link } from 'react-router-dom';
 import api from '../../services/services';
 import './delete.css';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class DeletarUsuario extends Component{
     constructor(props){
@@ -32,7 +34,8 @@ class DeletarUsuario extends Component{
                     <label htmlFor="nome">Nome</label>
                     <h5>{this.state.usuario.nome}</h5>
                     <p>tem certeza que deseja deletar este registro?</p>
-                    <button onClick={this.handleClick}>Remover</button>
+                    
+                    <Button onClick={this.handleClick} variant="danger">Remover</Button> 
                     <br/>
                     <br/>
                     <Link to={`/`}>Voltar</Link>
