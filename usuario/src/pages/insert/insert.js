@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './insert.css';
 import api from '../../services/services';
 import {Link, Redirect} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
 
 
 class CriarUsuario extends Component{
@@ -114,7 +116,9 @@ class CriarUsuario extends Component{
                             Inativo
                         </label>
                     </div>
-                    <button type="submit">Cadastrar</button>
+                   
+                    <Button variant="success" type="submit" >Cadastrar</Button>
+                    <Button className="botao-voltar" variant="primary"><Link to={`/`}>Voltar</Link></Button>
                     </fieldset>
                 </form>
             )

@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import './update.css';
 import { Redirect } from 'react-router-dom';
+
 import api from '../../services/services';
+import {Link} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
+
 
 
 class EditarUsuario extends Component{
@@ -97,7 +102,9 @@ class EditarUsuario extends Component{
                         />
                     </div>
                     <br/>
-                    <button type="submit">Editar</button>
+                   
+                    <Button type="submit" variant="warning">Editar</Button>
+                    <Button className="botao-voltar" variant="primary"><Link to={`/`}>Voltar</Link></Button>
                     </fieldset>
                 </form>
             )

@@ -14,3 +14,13 @@
     margin-top: 5px;
     padding: 10px 20px;
 }
+.botao-voltar{
+    color: white;
+}
+
+a{
+    color: white;
+}
+a:hover{
+    color: black;
+}
