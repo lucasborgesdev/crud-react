@@ -1,5 +1,6 @@
-# CRUD-NodeJS-MongoDB
+# CRUD NodeJS MongoDB
+# Front em React
 
-Curso com os principais conceitos de integração do NodeJs e MongoDB.
 
-Tópicos abordados: --> Criação do Sistema --> INSERT --> SELECT --> UPDATE --> DELETE --> Atividade
+--> Criação do Sistema de cadastro de usuario --> INSERT --> SELECT --> UPDATE --> DELETE --> 
+--> Front em react 
